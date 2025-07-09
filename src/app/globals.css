@@ -1,42 +1,69 @@
+@font-face {
+  font-family: "Allsorts";
+  src: url("/fonts/allsorts.woff");
+}
+
+@font-face {
+  font-family: "Maragsa";
+  src: url("/fonts/Maragsâ-Display.woff");
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --deep-shadow: 1px 1px 0 var(--shadow-color),
+    1.2px 1.2px 0 var(--shadow-color), 1.4px 1.4px 0 var(--shadow-color),
+    1.6px 1.6px 0 var(--shadow-color), 1.8px 1.8px 0 var(--shadow-color),
+    2px 2px 0 var(--shadow-color), 2.2px 2.2px 0 var(--shadow-color),
+    2.4px 2.4px 0 var(--shadow-color), 2.6px 2.6px 0 var(--shadow-color),
+    2.8px 2.8px 0 var(--shadow-color), 3px 3px 0 var(--shadow-color),
+    3.2px 3.2px 0 var(--shadow-color), 3.4px 3.4px 0 var(--shadow-color),
+    3.6px 3.6px 0 var(--shadow-color), 3.8px 3.8px 0 var(--shadow-color),
+    4px 4px 0 var(--shadow-color), 4.2px 4.2px 0 var(--shadow-color),
+    4.4px 4.4px 0 var(--shadow-color), 4.6px 4.6px 0 var(--shadow-color),
+    4.8px 4.8px 0 var(--shadow-color), 5px 5px 0 var(--shadow-color),
+    5.2px 5.2px 0 var(--shadow-color), 5.4px 5.4px 0 var(--shadow-color),
+    5.6px 5.6px 0 var(--shadow-color), 5.8px 5.8px 0 var(--shadow-color),
+    6px 6px 0 var(--shadow-color), 6.2px 6.2px 0 var(--shadow-color),
+    6.4px 6.4px 0 var(--shadow-color), 6.6px 6.6px 0 var(--shadow-color),
+    6.8px 6.8px 0 var(--shadow-color), 7px 7px 0 var(--shadow-color),
+    7.2px 7.2px 0 var(--shadow-color), 7.4px 7.4px 0 var(--shadow-color),
+    7.6px 7.6px 0 var(--shadow-color), 7.8px 7.8px 0 var(--shadow-color),
+    8px 8px 0 var(--shadow-color), 8.2px 8.2px 0 var(--shadow-color),
+    8.4px 8.4px 0 var(--shadow-color), 8.6px 8.6px 0 var(--shadow-color),
+    8.8px 8.8px 0 var(--shadow-color), 9px 9px 0 var(--shadow-color),
+    9.2px 9.2px 0 var(--shadow-color), 9.4px 9.4px 0 var(--shadow-color),
+    9.6px 9.6px 0 var(--shadow-color), 9.8px 9.8px 0 var(--shadow-color),
+    10px 10px 0 var(--shadow-color);
+}
+/* @link https://utopia.fyi/type/calculator?c=320,18,1.2,1240,20,1.25,8,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+
+:root {
+  --step--3: clamp(0.64rem, 0.6549rem + -0.0192vw, 0.651rem);
+  --step--2: clamp(0.7813rem, 0.7747rem + 0.0326vw, 0.8rem);
+  --step--1: clamp(0.9375rem, 0.9158rem + 0.1087vw, 1rem);
+  --step-0: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
+  --step-1: clamp(1.35rem, 1.2761rem + 0.3696vw, 1.5625rem);
+  --step-2: clamp(1.62rem, 1.5041rem + 0.5793vw, 1.9531rem);
+  --step-3: clamp(1.944rem, 1.771rem + 0.8651vw, 2.4414rem);
+  --step-4: clamp(2.3328rem, 2.0827rem + 1.2504vw, 3.0518rem);
+  --step-5: clamp(2.7994rem, 2.4462rem + 1.7658vw, 3.8147rem);
+  --step-6: clamp(3.3592rem, 2.8691rem + 2.4507vw, 4.7684rem);
+  --step-7: clamp(4.0311rem, 3.36rem + 3.3555vw, 5.9605rem);
+  --step-8: clamp(4.8373rem, 3.9283rem + 4.5448vw, 7.4506rem);
+  --step-logo: clamp(2.5rem, 1.5rem + 5vw, 5.9rem);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+  background-color: var(--bg-color);
+  margin: 1rem;
+  list-style: none;
+  padding: 0.2rem;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  color: var(--text-pri);
+  text-decoration-line: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+a:hover {
+  color: var(--text-hover-color);
 }

@@ -1,0 +1,14 @@
+:root {
+  --bg-color: #081426;
+  --text-pri: #f17754;
+  --caret-color: #ef6d49;
+  --sub-color: #ffbc90;
+ --shadow-color: #040e1d;
+  --text-color: #ffe4bc;
+  --text-hover-color: #ca4754;
+  --error-extra-color: #7e2a33;
+  --colorful-error-color: #ca4754;
+  --selection-color: #7e2a33;
+}
+
+/* your theme has been added to the _list file and the textColor property is the theme's main color */

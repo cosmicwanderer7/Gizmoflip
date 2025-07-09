@@ -1,0 +1,13 @@
+:root {
+  --bg-color: #fec8cd;
+  --text-pri: #ffffff;
+  --caret-color: #ffffff;
+  --sub-color: #a30000;
+ --shadow-color: #f2babd;
+  --text-color: #ffffff;
+  --text-hover-color: #2e7dde;
+  --error-extra-color: #2e7dde;
+  --colorful-error-color: #2e7dde;
+  --selection-color: #2e7dde;
+  --font: Roboto Mono;
+}

@@ -1,0 +1,62 @@
+:root {
+  --bg-color: #3b4a62;
+  --text-pri: #bef0ff;
+  --caret-color: #bef0ff;
+  --sub-color: #fe9841;
+ --shadow-color: #313e55;
+  --text-color: #dbdeeb;
+  --text-hover-color: #ed2939;
+  --error-extra-color: #ce122c;
+  --colorful-error-color: #ed2939;
+  --selection-color: #ce122c;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+header #logo .text {
+  background: linear-gradient(120deg, var(--text-pri), var(--sub-color));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  padding-bottom: 0.1em;
+}
+header #logo .text .top {
+  color: var(--text-pri);
+}
+header.focus #logo .text {
+  background: linear-gradient(-120deg, var(--text-pri), var(--sub-color));
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  padding-bottom: 0.1em;
+}
+header.focus nav > .textButton,
+header.focus nav > .showAlerts {
+  background: none;
+}
+header nav > .textButton,
+header nav > .showAlerts {
+  border-radius: 150px 150px 32px 32px;
+  background-color: var(--shadow-color);
+  color: var(--text-pri);
+}
+header nav > .textButton:hover,
+header nav > .showAlerts:hover {
+  animation: pulse 800ms ease-out infinite;
+  color: var(--text-pri);
+  background-color: var(--shadow-color);
+}
+header nav > .view-leaderboards,
+header nav > .view-leaderboards:hover {
+  color: var(--sub-color);
+}

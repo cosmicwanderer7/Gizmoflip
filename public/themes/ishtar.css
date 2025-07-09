@@ -1,0 +1,16 @@
+:root {
+  --bg-color: #202020;
+  --text-pri: #91170c;
+  --caret-color: #c58940;
+  --sub-color: #847869;
+ --shadow-color: #272727;
+  --text-color: #fae1c3;
+  --text-hover-color: #bb1e10;
+  --error-extra-color: #791717;
+  --colorful-error-color: #c5da33;
+  --selection-color: #849224;
+}
+
+header #logo .bottom {
+  color: #fae1c3;
+}

@@ -1,0 +1,27 @@
+/* Center the content vertically and horizontally */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 14rem);
+}
+
+/* Your main text element with your desired styling */
+.name {
+  color: var(--text-pri);
+  font-size: var(--step-logo);
+  font-family: "Allsorts", sans-serif;
+  font-feature-settings: "ss04" 1; /* initial variation */
+  font-weight: bold;
+  position: absolute;
+  padding: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: var(--deep-shadow);
+}
+
+/* Each letter is an inline-block element so we can animate it individually */
+.name span {
+  display: inline-block;
+  transition: font-feature-settings 0.1s;
+}

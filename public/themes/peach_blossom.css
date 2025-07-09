@@ -1,0 +1,12 @@
+:root {
+  --bg-color: #292929;
+  --text-pri: #99b898;
+  --caret-color: #616161;
+  --sub-color: #616161;
+ --shadow-color: #2a363b;
+  --text-color: #fecea8;
+  --text-hover-color: #ff6961;
+  --error-extra-color: #e84a5f;
+  --colorful-error-color: #ff6961;
+  --selection-color: #e84a5f;
+}
