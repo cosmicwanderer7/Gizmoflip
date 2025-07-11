@@ -12,10 +12,18 @@ export default function RootLayout({ children }) {
       try {
         const res = await fetch("/api/themes");
         const themes = await res.json();
+
+        const defaultTheme = "default";
         const savedTheme = localStorage.getItem("theme");
-        const fallback = themes[0]?.name;
-        const selectedTheme =
-          themes.find((t) => t.name === savedTheme)?.name || fallback;
+
+        const availableThemeNames = themes.map((t) => t.name);
+        const fallback = availableThemeNames.includes(defaultTheme)
+          ? defaultTheme
+          : themes[0]?.name;
+
+        const selectedTheme = availableThemeNames.includes(savedTheme)
+          ? savedTheme
+          : fallback;
 
         if (selectedTheme) {
           const linkId = "theme-link";
@@ -26,8 +34,9 @@ export default function RootLayout({ children }) {
             link.rel = "stylesheet";
             document.head.appendChild(link);
           }
+
           link.href = `/themes/${selectedTheme}.css`;
-          localStorage.setItem("theme", selectedTheme); // Save for next load
+          localStorage.setItem("theme", selectedTheme); // Save it if needed
         }
       } catch (err) {
         console.error("Failed to initialize theme:", err);
@@ -36,6 +45,7 @@ export default function RootLayout({ children }) {
 
     initializeTheme();
   }, []);
+
   return (
     <html lang="en">
       <body>

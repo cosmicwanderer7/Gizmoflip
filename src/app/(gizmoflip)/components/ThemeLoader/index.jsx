@@ -20,13 +20,21 @@ export default function ThemeLoader({ onClose }) {
       .then((res) => res.json())
       .then((data) => {
         setThemes(data);
+
+        const defaultTheme = "default"; // Your intended initial theme
         const saved = localStorage.getItem("theme");
-        const fallback = data[0]?.name;
-        const currentTheme = data.find((t) => t.name === saved)
-          ? saved
-          : fallback;
+        const availableNames = data.map((t) => t.name);
+
+        const currentTheme =
+          saved && availableNames.includes(saved)
+            ? saved
+            : availableNames.includes(defaultTheme)
+              ? defaultTheme
+              : data[0]?.name;
+
         setSelectedTheme(currentTheme);
         originalTheme.current = currentTheme;
+        applyTheme(currentTheme);
       })
       .catch((error) => {
         console.error("Failed to load themes:", error);
