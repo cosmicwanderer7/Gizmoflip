@@ -11,7 +11,7 @@
   color: var(--text-pri);
   font-size: var(--step-logo);
   font-family: "Allsorts", sans-serif;
-  font-feature-settings: "ss04" 1; /* initial variation */
+  font-feature-settings: "ss01" 1; /* initial variation */
   font-weight: bold;
   position: absolute;
   padding: 2rem;
