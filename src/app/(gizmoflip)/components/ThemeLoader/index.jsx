@@ -46,11 +46,11 @@ export default function ThemeLoader({ onClose }) {
 
     // Prevent scrolling behind popup
     document.body.style.overflow = "hidden";
-
-    // Auto-focus search
-    setTimeout(() => {
-      searchInputRef.current?.focus();
-    }, 100);
+    //
+    // // Auto-focus search
+    // setTimeout(() => {
+    //   searchInputRef.current?.focus();
+    // }, 100);
 
     // Add fake browser history entry (Android back support)
     const historyPushDelay = setTimeout(() => {
