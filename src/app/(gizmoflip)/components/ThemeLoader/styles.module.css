@@ -22,8 +22,8 @@
   background: var(--bg-color);
   border: 2px solid var(--text-pri);
   border-radius: 10px;
-  margin: var(--step-2);
   padding: var(--step-0);
+  margin: var(--step-1);
   width: min(500px, 90vw);
   max-height: min(700px, 80vh);
   font-family: "Maragsa", sans-serif;
@@ -178,7 +178,6 @@
   .themeMenu {
     width: 95vw;
     max-height: 85vh;
-    margin: 0.5rem;
   }
 
   .themeItem {
