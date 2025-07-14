@@ -107,7 +107,7 @@ export default function ThemeLoader({ onClose }) {
     setSelectedTheme(theme.name);
     originalTheme.current = theme.name;
     localStorage.setItem("theme", theme.name);
-    handleClose(); // 👈 Close the theme picker after applying
+    handleClose();
   };
 
   const handleClose = () => {
