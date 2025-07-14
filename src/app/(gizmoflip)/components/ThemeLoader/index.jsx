@@ -15,113 +15,114 @@ export default function ThemeLoader({ onClose }) {
   const searchInputRef = useRef(null);
 
   useEffect(() => {
-    // Load themes and set initial theme
+    // Fetch themes and apply initial theme
     fetch("/api/themes")
       .then((res) => res.json())
       .then((data) => {
         setThemes(data);
-
-        const defaultTheme = "default"; // Your intended initial theme
         const saved = localStorage.getItem("theme");
-        const availableNames = data.map((t) => t.name);
+        const defaultTheme = "default";
+        const themeNames = data.map((t) => t.name);
 
-        const currentTheme =
-          saved && availableNames.includes(saved)
-            ? saved
-            : availableNames.includes(defaultTheme)
-              ? defaultTheme
-              : data[0]?.name;
+        const chosenTheme =
+          (saved && themeNames.includes(saved) && saved) ||
+          (themeNames.includes(defaultTheme) && defaultTheme) ||
+          data[0]?.name;
 
-        setSelectedTheme(currentTheme);
-        originalTheme.current = currentTheme;
-        applyTheme(currentTheme);
+        if (chosenTheme) {
+          setSelectedTheme(chosenTheme);
+          originalTheme.current = chosenTheme;
+          applyTheme(chosenTheme);
+          if (!saved) localStorage.setItem("theme", chosenTheme);
+        }
       })
-      .catch((error) => {
-        console.error("Failed to load themes:", error);
-      });
+      .catch((err) => console.error("Failed to load themes:", err));
 
-    // Event listeners
+    // ESC to close
     const escHandler = (e) => {
       if (e.key === "Escape") handleClose();
     };
-
     document.addEventListener("keydown", escHandler);
+
+    // Prevent scrolling behind popup
     document.body.style.overflow = "hidden";
 
-    // Auto-focus search input
+    // Auto-focus search
     setTimeout(() => {
       searchInputRef.current?.focus();
     }, 100);
 
-    // Cleanup
+    // Add fake browser history entry (Android back support)
+    const historyPushDelay = setTimeout(() => {
+      window.history.pushState({ themePickerOpen: true }, "");
+    }, 200);
+
+    const popHandler = () => {
+      if (!isClosing) handleClose();
+    };
+    window.addEventListener("popstate", popHandler);
+
     return () => {
       document.removeEventListener("keydown", escHandler);
+      window.removeEventListener("popstate", popHandler);
       document.body.style.overflow = "";
       clearTimeout(previewTimeout.current);
+      clearTimeout(historyPushDelay);
+
+      if (window.history.state?.themePickerOpen) {
+        window.history.back();
+      }
     };
   }, []);
 
   const applyTheme = (themeName) => {
     const linkId = "theme-link";
     let link = document.getElementById(linkId);
-
     if (!link) {
       link = document.createElement("link");
       link.id = linkId;
       link.rel = "stylesheet";
       document.head.appendChild(link);
     }
-
     link.href = `/themes/${themeName}.css`;
   };
 
   const handleHover = (theme) => {
     clearTimeout(previewTimeout.current);
-
     if (theme.name !== selectedTheme) {
       previewTimeout.current = setTimeout(() => {
         applyTheme(theme.name);
-      }, 300); // Reduced delay for better UX
+      }, 300);
     }
   };
 
   const handleMouseLeave = () => {
     clearTimeout(previewTimeout.current);
-    // Revert to selected theme if hovering away
-    if (selectedTheme) {
-      applyTheme(selectedTheme);
-    }
+    if (selectedTheme) applyTheme(selectedTheme);
   };
 
   const handleClick = (theme) => {
     clearTimeout(previewTimeout.current);
     applyTheme(theme.name);
-    localStorage.setItem("theme", theme.name);
     setSelectedTheme(theme.name);
     originalTheme.current = theme.name;
+    localStorage.setItem("theme", theme.name);
   };
 
   const handleClose = () => {
     if (isClosing) return;
-
     setIsClosing(true);
     clearTimeout(previewTimeout.current);
     applyTheme(originalTheme.current);
-
-    // Add a small delay to allow exit animation
-    setTimeout(() => {
-      onClose();
-    }, 200);
+    setTimeout(() => onClose(), 200); // Allow closing animation
   };
 
   const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      handleClose();
-    }
+    if (e.target === e.currentTarget) handleClose();
   };
 
-  const filteredThemes = themes.filter((theme) =>
-    theme.name.toLowerCase().includes(search.toLowerCase()),
+  const filteredThemes = themes.filter((t) =>
+    t.name.toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
@@ -142,8 +143,8 @@ export default function ThemeLoader({ onClose }) {
           <input
             ref={searchInputRef}
             type="text"
-            value={search}
             placeholder="Search themes..."
+            value={search}
             onChange={(e) => setSearch(e.target.value)}
             autoComplete="off"
           />
@@ -163,8 +164,7 @@ export default function ThemeLoader({ onClose }) {
                 <span className={styles.themeName}>
                   {theme.name.charAt(0).toUpperCase() + theme.name.slice(1)}
                 </span>
-
-                {theme.colors && theme.colors.length > 0 && (
+                {theme.colors?.length > 0 && (
                   <span className={styles.swatches}>
                     {theme.colors.slice(0, 3).map((color, idx) => (
                       <span
