@@ -11,7 +11,7 @@ import ThemeLoader from "../ThemeLoader";
 
 const NAV_LINKS = [
   { name: "Products", href: "#" },
-  { name: "About", href: "#" },
+  { name: "About Us", href: "#" },
   { name: "Contact", href: "#" },
 ];
 

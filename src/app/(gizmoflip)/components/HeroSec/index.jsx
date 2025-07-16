@@ -1,10 +1,55 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./styles.module.css";
+
+const slogans = [
+  "Reduce. Reuse. Recycle.",
+  "Buy refurbished. Save the planet.",
+  "Keep e-waste out of landfills.",
+  "Gizmoflip: Smarter choices for Earth.",
+];
 
 const HeroSec = () => {
   const nameRef = useRef(null);
+  const [typedText, setTypedText] = useState("");
+  const [sloganIndex, setSloganIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isWaiting, setIsWaiting] = useState(false);
 
+  // Typing effect
+  useEffect(() => {
+    const currentSlogan = slogans[sloganIndex];
+    let timeout;
+
+    if (isWaiting) {
+      // Wait period after typing is complete
+      timeout = setTimeout(() => {
+        setIsWaiting(false);
+        setIsDeleting(true);
+      }, 2000); // Stay visible for 2 seconds
+    } else if (!isDeleting && charIndex < currentSlogan.length) {
+      // Typing forward
+      setTypedText(currentSlogan.slice(0, charIndex + 1));
+      timeout = setTimeout(() => setCharIndex(charIndex + 1), 80);
+    } else if (!isDeleting && charIndex === currentSlogan.length) {
+      // Finished typing, now wait
+      setIsWaiting(true);
+    } else if (isDeleting && charIndex > 0) {
+      // Deleting backward
+      setTypedText(currentSlogan.slice(0, charIndex - 1));
+      timeout = setTimeout(() => setCharIndex(charIndex - 1), 40);
+    } else if (isDeleting && charIndex === 0) {
+      // Finished deleting, move to next slogan
+      setIsDeleting(false);
+      setSloganIndex((prev) => (prev + 1) % slogans.length);
+      timeout = setTimeout(() => setCharIndex(0), 500);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [charIndex, isDeleting, isWaiting, sloganIndex]);
+
+  // Gizmoflip animated letters logic (unchanged from your code)
   useEffect(() => {
     const nameEl = nameRef.current;
     if (!nameEl) return;
@@ -12,11 +57,9 @@ const HeroSec = () => {
     const originalHTML = nameEl.innerHTML;
     nameEl.innerHTML = "";
 
-    // Create temporary div to parse HTML
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = originalHTML;
 
-    // Process nodes to wrap each character in spans
     function processNode(node, parent) {
       if (node.nodeType === Node.TEXT_NODE) {
         for (let char of node.textContent) {
@@ -39,10 +82,9 @@ const HeroSec = () => {
 
     const variations = ["ss01", "ss02", "ss03", "ss04", "ss05", "ss06"];
     const letters = nameEl.querySelectorAll("span");
-    const activeAnimations = new Set(); // Track active animations
-    let mainTimeout; // Track main animation loop timeout
+    const activeAnimations = new Set();
+    let mainTimeout;
 
-    // Fisher-Yates shuffle algorithm for better randomization
     function shuffleArray(array) {
       const shuffled = [...array];
       for (let i = shuffled.length - 1; i > 0; i--) {
@@ -65,7 +107,6 @@ const HeroSec = () => {
 
     function animateLetter(letter) {
       if (activeAnimations.has(letter)) return;
-
       activeAnimations.add(letter);
       letter.classList.add("animating");
       let count = 0;
@@ -78,7 +119,6 @@ const HeroSec = () => {
         });
 
         count++;
-
         if (count >= maxIterations) {
           clearInterval(interval);
           requestAnimationFrame(() => {
@@ -103,9 +143,7 @@ const HeroSec = () => {
     function randomAnimationLoop() {
       letters.forEach((letter, index) => {
         setTimeout(
-          () => {
-            animateLetter(letter);
-          },
+          () => animateLetter(letter),
           index * 100 + Math.random() * 1000,
         );
       });
@@ -119,12 +157,10 @@ const HeroSec = () => {
     return () => {
       clearTimeout(initialTimeout);
       clearTimeout(mainTimeout);
-
       activeAnimations.forEach((letter) => {
         letter.classList.remove("animating");
       });
       activeAnimations.clear();
-
       mouseEnterHandlers.forEach(({ letter, handler }) => {
         letter.removeEventListener("mouseenter", handler);
       });
@@ -135,6 +171,10 @@ const HeroSec = () => {
     <div className={styles.container}>
       <div className={styles.name} ref={nameRef}>
         Gizmoflip
+      </div>
+      <div className={styles.slogan}>
+        {typedText}
+        <span className={styles.cursor}>|</span>
       </div>
     </div>
   );
