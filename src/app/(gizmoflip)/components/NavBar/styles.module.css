@@ -33,7 +33,7 @@
 
 .mobileNavItems {
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--space-2xs);
 }
 
 .navItem a {
@@ -61,7 +61,7 @@
 }
 
 .icon {
-  padding: 5px;
+  padding: var(--space-3xs);
   cursor: pointer;
   transition:
     color 0.3s ease,
@@ -78,16 +78,15 @@
 .mobileMenu {
   position: absolute;
   top: 75px;
-  right: 150px;
-  font-family: Maragsa;
+  right: 145px;
   font-size: var(--step-1);
   color: var(--text-pri);
   background: var(--bg-color);
   border: 1px solid var(--text-pri);
-  border-radius: 6px;
-  padding: 0.5rem;
+  border-radius: var(--radius-md);
+  padding: var(--space-2xs);
   z-index: 3000;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 var(--space-3xs) var(--space-2xs) rgba(0, 0, 0, 0.1);
 }
 
 .mobileOnly {

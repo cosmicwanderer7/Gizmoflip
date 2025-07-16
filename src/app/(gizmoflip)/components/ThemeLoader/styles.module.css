@@ -12,18 +12,12 @@
   animation: fadeIn 0.2s ease-out forwards;
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
 .themeMenu {
   background: var(--bg-color);
   border: 2px solid var(--text-pri);
-  border-radius: 10px;
-  padding: var(--step-0);
-  margin: var(--step-1);
+  border-radius: var(--radius-md);
+  padding: var(--space-s);
+  margin: var(--space-m);
   width: min(500px, 90vw);
   max-height: min(700px, 80vh);
   font-family: "Maragsa", sans-serif;
@@ -33,19 +27,13 @@
   animation: slideIn 0.3s ease-out forwards;
 }
 
-@keyframes slideIn {
-  to {
-    transform: scale(1) translateY(0);
-  }
-}
-
 .searchBar {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--space-2xs);
   background: var(--bg-color);
-  padding: 0.5rem;
-  margin-bottom: 1rem;
+  padding: var(--space-2xs);
+  margin-bottom: var(--space-s);
 }
 
 .searchBar:focus-within {
@@ -57,7 +45,7 @@
   background: transparent;
   border: none;
   color: var(--text-pri);
-  font-size: 1rem;
+  font-size: var(--step--1);
   outline: none;
   font-family: inherit;
 }
@@ -83,15 +71,14 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
 }
 
 .themeItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem;
-  border-radius: 6px;
+  padding: var(--space-2xs);
+  border-radius: var(--radius-md);
   cursor: pointer;
   transition: all 0.2s ease;
   border: 1px solid transparent;
@@ -100,7 +87,6 @@
 .themeItem:hover {
   background: rgba(255, 255, 255, 0.1);
   border-color: var(--text-pri);
-  transform: translateX(4px);
 }
 
 .themeItem.active {
@@ -115,35 +101,31 @@
   transition: color 0.2s ease;
 }
 
-.themeItem.active .themeName {
-  color: var(--text-hover-color);
-}
-
+.themeItem.active .themeName,
 .themeItem:hover .themeName {
   color: var(--text-hover-color);
 }
 
 .swatches {
   display: flex;
-  gap: 0.2rem;
-  padding: 2px;
+  gap: var(--space-3xs);
+  padding: var(--space-3xs);
   border: 2px solid white;
   background-color: white;
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   transition: all 0.2s ease;
 }
 
 .themeItem:hover .swatches {
-  gap: 0.4rem;
-
+  gap: var(--space-2xs);
   border-color: rgba(255, 255, 255, 0.5);
   background-color: rgba(255, 255, 255, 0.2);
 }
 
 .dot {
-  width: 0.7rem;
-  height: 0.7rem;
-  border-radius: 50%;
+  width: var(--step--3);
+  height: var(--step--3);
+  border-radius: var(--radius-full);
   background: white;
   transition: transform 0.2s ease;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -155,17 +137,17 @@
 
 /* Scrollbar styling */
 .themeMenu::-webkit-scrollbar {
-  width: 8px;
+  width: var(--space-2xs);
 }
 
 .themeMenu::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+  border-radius: var(--radius-md);
 }
 
 .themeMenu::-webkit-scrollbar-thumb {
   background: var(--text-pri);
-  border-radius: 4px;
+  border-radius: var(--radius-md);
   opacity: 0.5;
 }
 
@@ -173,23 +155,15 @@
   background: var(--text-hover-color);
 }
 
-/* Responsive design */
-@media (max-width: 600px) {
-  .themeMenu {
-    width: 95vw;
-    max-height: 85vh;
+/* Keyframes */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
+}
 
-  .themeItem {
-    padding: 0.5rem;
-  }
-
-  .themeName {
-    font-size: 0.9rem;
-  }
-
-  .dot {
-    width: 0.6rem;
-    height: 0.6rem;
+@keyframes slideIn {
+  to {
+    transform: scale(1) translateY(0);
   }
 }

@@ -9,12 +9,12 @@
 /* Your main text element with your desired styling */
 .name {
   color: var(--text-pri);
-  font-size: var(--step-logo);
+  font-size: var(--step-name);
   font-family: "Allsorts", sans-serif;
   font-feature-settings: "ss01" 1; /* initial variation */
   font-weight: bold;
   position: absolute;
-  padding: 2rem;
+  padding: var(--space-m-l);
   text-transform: uppercase;
   letter-spacing: 4px;
   text-shadow: var(--deep-shadow);

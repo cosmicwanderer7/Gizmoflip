@@ -1,3 +1,4 @@
+/* Font Face Declarations */
 @font-face {
   font-family: "Allsorts";
   src: url("/fonts/allsorts.woff");
@@ -8,7 +9,14 @@
   src: url("/fonts/Maragsâ-Display.woff");
 }
 
+@font-face {
+  font-family: "Ganh";
+  src: url("/fonts/Ganhrg.otf");
+}
+
+/* Root Variables */
 :root {
+  /* Deep Shadow Effect */
   --deep-shadow: 1px 1px 0 var(--shadow-color),
     1.2px 1.2px 0 var(--shadow-color), 1.4px 1.4px 0 var(--shadow-color),
     1.6px 1.6px 0 var(--shadow-color), 1.8px 1.8px 0 var(--shadow-color),
@@ -33,10 +41,9 @@
     9.2px 9.2px 0 var(--shadow-color), 9.4px 9.4px 0 var(--shadow-color),
     9.6px 9.6px 0 var(--shadow-color), 9.8px 9.8px 0 var(--shadow-color),
     10px 10px 0 var(--shadow-color);
-}
-/* @link https://utopia.fyi/type/calculator?c=320,18,1.2,1240,20,1.25,8,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
 
-:root {
+  /* Typography Scale - Utopia Calculator */
+  /* @link https://utopia.fyi/type/calculator?c=320,18,1.2,1240,20,1.25,8,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
   --step--3: clamp(0.64rem, 0.6549rem + -0.0192vw, 0.651rem);
   --step--2: clamp(0.7813rem, 0.7747rem + 0.0326vw, 0.8rem);
   --step--1: clamp(0.9375rem, 0.9158rem + 0.1087vw, 1rem);
@@ -49,19 +56,51 @@
   --step-6: clamp(3.3592rem, 2.8691rem + 2.4507vw, 4.7684rem);
   --step-7: clamp(4.0311rem, 3.36rem + 3.3555vw, 5.9605rem);
   --step-8: clamp(4.8373rem, 3.9283rem + 4.5448vw, 7.4506rem);
-  --step-logo: clamp(2.5rem, 1.5rem + 5vw, 5.9rem);
+  --step-name: clamp(1.5rem, 1rem + 5vw, 5.9rem);
+
+  /* Spacing Scale - Utopia Calculator */
+  /* @link https://utopia.fyi/space/calculator?c=320,18,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+  --space-3xs: clamp(0.3125rem, 0.3125rem + 0vw, 0.3125rem);
+  --space-2xs: clamp(0.5625rem, 0.5408rem + 0.1087vw, 0.625rem);
+  --space-xs: clamp(0.875rem, 0.8533rem + 0.1087vw, 0.9375rem);
+  --space-s: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
+  --space-m: clamp(1.6875rem, 1.6223rem + 0.3261vw, 1.875rem);
+  --space-l: clamp(2.25rem, 2.163rem + 0.4348vw, 2.5rem);
+  --space-xl: clamp(3.375rem, 3.2446rem + 0.6522vw, 3.75rem);
+  --space-2xl: clamp(4.5rem, 4.3261rem + 0.8696vw, 5rem);
+  --space-3xl: clamp(6.75rem, 6.4891rem + 1.3043vw, 7.5rem);
+  --space-4xl: clamp(6rem, 5.7391rem + 1.3043vw, 6.25rem);
+  /* One-up Pairs */
+  --space-3xs-2xs: clamp(0.3125rem, 0.2038rem + 0.5435vw, 0.625rem);
+  --space-2xs-xs: clamp(0.5625rem, 0.4321rem + 0.6522vw, 0.9375rem);
+  --space-xs-s: clamp(0.875rem, 0.7446rem + 0.6522vw, 1.25rem);
+  --space-s-m: clamp(1.125rem, 0.8641rem + 1.3043vw, 1.875rem);
+  --space-m-l: clamp(1.6875rem, 1.4049rem + 1.413vw, 2.5rem);
+  --space-l-xl: clamp(2.25rem, 1.7283rem + 2.6087vw, 3.75rem);
+  --space-xl-2xl: clamp(3.375rem, 2.8098rem + 2.8261vw, 5rem);
+  --space-2xl-3xl: clamp(4.5rem, 3.4565rem + 5.2174vw, 7.5rem);
+
+  /* Custom Pairs */
+  --space-s-l: clamp(1.125rem, 0.6467rem + 2.3913vw, 2.5rem);
+
+  /* Border Radius Scale */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px; /* for pills/circles */
 }
 
+/* Base Styles */
 body {
   background-color: var(--bg-color);
-  margin: 1rem;
+  margin: var(--space-s);
   list-style: none;
-  padding: 0.2rem;
 }
 
 a {
   color: var(--text-pri);
-  text-decoration-line: none;
 }
 
 a:hover {

@@ -69,10 +69,8 @@ const HeroSec = () => {
       activeAnimations.add(letter);
       letter.classList.add("animating");
       let count = 0;
-      const maxIterations = 12; // Reduced for better performance
-
+      const maxIterations = 12;
       const interval = setInterval(() => {
-        // Use requestAnimationFrame for smoother animations
         requestAnimationFrame(() => {
           const randomVariation =
             variations[Math.floor(Math.random() * variations.length)];
@@ -83,7 +81,6 @@ const HeroSec = () => {
 
         if (count >= maxIterations) {
           clearInterval(interval);
-          // Settle on a final variation
           requestAnimationFrame(() => {
             const finalVariation = getNextVariation();
             letter.style.fontFeatureSettings = `"${finalVariation}" 1`;
@@ -91,10 +88,9 @@ const HeroSec = () => {
             activeAnimations.delete(letter);
           });
         }
-      }, 80); // Slightly slower for better performance
+      }, 80);
     }
 
-    // Use passive event listeners for better performance
     const handleMouseEnter = (letter) => () => animateLetter(letter);
     const mouseEnterHandlers = [];
 
@@ -104,10 +100,8 @@ const HeroSec = () => {
       letter.addEventListener("mouseenter", handler, { passive: true });
     });
 
-    // Random animation loop with cleanup tracking
     function randomAnimationLoop() {
       letters.forEach((letter, index) => {
-        // Stagger the animations for a wave effect
         setTimeout(
           () => {
             animateLetter(letter);
@@ -116,27 +110,21 @@ const HeroSec = () => {
         );
       });
 
-      // Random delay between 7-12 seconds
       const randomDelay = Math.floor(Math.random() * 5000) + 7000;
       mainTimeout = setTimeout(randomAnimationLoop, randomDelay);
     }
 
-    // Start the animation loop after a brief delay
     const initialTimeout = setTimeout(randomAnimationLoop, 2000);
 
-    // Comprehensive cleanup function
     return () => {
-      // Clear all timeouts
       clearTimeout(initialTimeout);
       clearTimeout(mainTimeout);
 
-      // Clear all active animations
       activeAnimations.forEach((letter) => {
         letter.classList.remove("animating");
       });
       activeAnimations.clear();
 
-      // Remove all event listeners
       mouseEnterHandlers.forEach(({ letter, handler }) => {
         letter.removeEventListener("mouseenter", handler);
       });
